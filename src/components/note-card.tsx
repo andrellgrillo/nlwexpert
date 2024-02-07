@@ -1,19 +1,28 @@
-export function NoteCard() {
+import * as Dialog from '@radix-ui/react-dialog'
+
+interface NoteCardProps {
+  note: {
+    date: Date
+    content: string
+  }
+}
+
+export function NoteCard({ note }: NoteCardProps) {
   return (
-    <button className="rounded-md bg-slate-800 p-5 space-y-3 overflow-hidden relative outline-none hover:ring-2 hover:ring-slate-600 focus-visible:ring-2 focus-visible:ring-lime-400">
-      <span className="text-sm font-medium text-slate-300">há 2 dias</span>
-      <p className="text-sm leading-6 text-slate-400">
-        O Drizzle possui um plugin do ESLint para evitar que realizemos updates
-        ou deletes sem where...
-      </p>
-      <p className="text-sm leading-6 text-slate-400">
-        Para configurar o plugin, é preciso instalar como abaixo Para configurar
-        o plugin, é preciso instalar como abaixo Para configurar o plugin, é
-        preciso instalar como abaixo Para configurar o plugin, é preciso
-        instalar como abaixo Para configurar o plugin, é preciso instalar como
-        abaixo Para configurar o plugin, é preciso instalar como abaixo :
-      </p>
-      <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/60 to-black/0 pointer-events-none" />
-    </button>
+    <Dialog.Root>
+      <Dialog.Trigger className="rounded-md text-left flex flex-col bg-slate-800 p-5 gap-3 overflow-hidden relative outline-none hover:ring-2 hover:ring-slate-600 focus-visible:ring-2 focus-visible:ring-lime-400">
+        <span className="text-sm font-medium text-slate-300">
+          {note.date.toISOString()}
+        </span>
+        <p className="text-sm leading-6 text-slate-400">{note.content}</p>
+        <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/60 to-black/0 pointer-events-none" />
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay className="inset-0 fixed bg-black/60" />
+        <Dialog.Content className="z-10 text-white absolute outline-none">
+          oi
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   )
 }
